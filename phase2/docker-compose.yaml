@@ -1,0 +1,19 @@
+version: '3'
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - './data/redis:/bitnami/redis/data'
+  retriever:
+    build: .
+    container_name: retriever
+    depends_on:
+      - redis
+    ports:
+      - "8080:8080"

@@ -1,0 +1,10 @@
+redis:
+  expire_time: 100
+  host: redis
+  port: 6379
+  db: 0
+  password: ""
+
+server:
+  port: 8080
+  api_key: khkhkhkhkhhk

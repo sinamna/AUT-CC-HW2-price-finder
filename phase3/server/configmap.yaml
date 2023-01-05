@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  config.yaml: |
+    redis:
+      expire_time: 2
+      host: redis.ccproj.svc.cluster.local
+      port: 6379
+      db: 0
+      password: ""
+
+    server:
+      port: 8080
+      api_key: khkhkhkhkh
+kind: ConfigMap
+metadata:
+  name: retriever-cm
+  namespace: ccproj
+  labels:
+    app: retriever

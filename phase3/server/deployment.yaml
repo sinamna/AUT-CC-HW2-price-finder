@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  retriever-deploy
+  labels:
+    app:  retriever-deploy
+  namespace: ccproj
+spec:
+  selector:
+    matchLabels:
+      app: retriever-deploy
+  template:
+    metadata:
+      labels:
+        app:  retriever-deploy
+    spec:
+      volumes:
+      - name: retriever-cm
+        configMap:
+          name: retriever-cm
+      containers:
+      - image:  sinamna/retriever:v1
+        name:  retriever
+        ports:
+        - containerPort:  8080
+        volumeMounts:
+        - mountPath: /app/config.yaml
+          name: retriever-cm
+          subPath: config.yaml
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Always
